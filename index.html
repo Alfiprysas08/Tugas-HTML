@@ -1,85 +1,451 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Website HTML Table</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tugas CSS</title>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.12);
+      --text: #eaf0ff;
+      --muted: rgba(234,240,255,.75);
+      --stroke: rgba(255,255,255,.14);
+
+      --grad1: linear-gradient(135deg,#7c3aed,#22c55e);
+      --grad2: linear-gradient(135deg,#06b6d4,#a78bfa);
+      --grad3: linear-gradient(135deg,#f97316,#ec4899);
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(700px 450px at 85% 25%, rgba(34,197,94,.28), transparent 55%),
+        radial-gradient(700px 450px at 60% 95%, rgba(236,72,153,.25), transparent 55%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+
+    .container{
+      width: min(1100px, 92%);
+      margin: 26px auto 60px;
+      display: grid;
+      gap: 18px;
+    }
+
+    /* SECTION 1: MENU */
+    .menu{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .menu-grid{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .menu a{
+      padding: 14px 10px;
+      text-align: center;
+      display: block;
+      font-weight: 700;
+      letter-spacing: .3px;
+      color: var(--text);
+      border-right: 1px solid var(--stroke);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .menu a:last-child{ border-right: none; }
+
+    .menu a:hover{
+      background: rgba(255,255,255,.08);
+      transform: translateY(-1px);
+    }
+
+    .menu a.active{
+      background: var(--grad2);
+      color: #06111f;
+    }
+
+    /* SECTION 2: HERO */
+    .hero{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-grid{
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      padding: 22px;
+      align-items: center;
+    }
+
+    .hero h1{
+      margin: 0 0 10px;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.15;
+    }
+
+    .hero p{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15.5px;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      cursor: pointer;
+      font-weight: 800;
+      color: #06111f;
+      background: var(--grad1);
+      box-shadow: 0 12px 26px rgba(0,0,0,.25);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+
+    .hero-media{
+      display: grid;
+      place-items: center;
+      padding: 10px;
+    }
+
+    .hero-img{
+      width: min(320px, 100%);
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+      box-shadow: 0 18px 40px rgba(0,0,0,.4);
+      transform: rotate(-1.5deg);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* SECTION 3: ABOUT / BIODATA */
+    .section{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-head{
+      padding: 18px 22px;
+      background: rgba(255,255,255,.06);
+      border-bottom: 1px solid var(--stroke);
+      display: grid;
+      gap: 6px;
+    }
+
+    .section-head h2{
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .section-head p{
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .biodata-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .card{
+      background: var(--card2);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 14px;
+      display: grid;
+      gap: 6px;
+      transition: transform .15s ease, background .15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.14);
+    }
+
+    .badge{
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      width: fit-content;
+      color: #06111f;
+    }
+
+    .badge.purple{ background: linear-gradient(135deg,#a78bfa,#22c55e); }
+    .badge.cyan{ background: linear-gradient(135deg,#06b6d4,#60a5fa); }
+    .badge.orange{ background: linear-gradient(135deg,#fb923c,#f472b6); }
+
+    .card .value{
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .card .hint{
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* SECTION 4: PORTFOLIO */
+    .portfolio-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .project{
+      background: rgba(255,255,255,.1);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .15s ease, filter .15s ease;
+    }
+
+    .project:hover{
+      transform: translateY(-3px);
+      filter: brightness(1.04);
+    }
+
+    .project-thumb{
+      background: var(--grad3);
+      padding: 12px;
+      display: grid;
+      place-items: center;
+    }
+
+    .project img{
+      width: 100%;
+      max-width: 240px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.2);
+      background: rgba(255,255,255,.25);
+    }
+
+    .project-body{
+      padding: 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .project-title{
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .project-desc{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* FOOTER kecil */
+    .footer{
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding-top: 6px;
+    }
+
+    /* =========================
+       RESPONSIVE (MEDIA QUERIES)
+       ========================= */
+
+    /* Tablet */
+    @media (max-width: 900px){
+      .hero-grid{
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+      .hero-media{ order: -1; }
+      .menu-grid{
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .biodata-grid{
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .portfolio-grid{
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* HP */
+    @media (max-width: 520px){
+      .menu-grid{
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .menu a{
+        padding: 12px 8px;
+        font-size: 14px;
+      }
+      .biodata-grid{
+        grid-template-columns: 1fr;
+      }
+      .portfolio-grid{
+        grid-template-columns: 1fr;
+      }
+      .section-head{
+        padding: 16px;
+      }
+      .hero-grid{
+        padding: 16px;
+      }
+      .btn{
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
 
-<!-- SECTION 1 : MENU -->
-<table border="1" width="100%">
-    <tr>
-        <td align="center"><a href="#">Header</a></td>
-        <td align="center"><a href="#">About</a></td>
-        <td align="center"><a href="#">Biodata</a></td>
-        <td align="center"><a href="#">Portfolio</a></td>
-        <td align="center"><a href="#">Contact</a></td>
-    </tr>
-</table>
+    <!-- SECTION 1 : MENU (div + grid) -->
+    <nav class="menu" aria-label="Menu">
+      <div class="menu-grid">
+        <a class="active" href="#">Header</a>
+        <a href="#">About</a>
+        <a href="#">Biodata</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
 
-<br>
+    <!-- SECTION 2 : JUDUL KIRI & GAMBAR KANAN (div + grid) -->
+    <section class="hero" id="header">
+      <div class="hero-grid">
+        <div>
+          <h1>Selamat Datang di Website Saya</h1>
+          <p>
+            Ini adalah contoh header dengan dua kolom. Kolom kiri berisi teks seperti ini.
+            Layout dibuat menggunakan <b>CSS Grid</b> dan responsif.
+          </p>
+          <button class="btn">✨ Pelajari lebih lanjut</button>
+        </div>
 
-<!-- SECTION 2 : JUDUL KIRI & GAMBAR KANAN -->
-<table border="1" width="100%">
-    <tr>
-        <td width="50%">
-            <h1>Selamat Datang di Website Saya</h1>
-            <p>
-                Ini adalah contoh contoh header dengan dua kolom. kolom kiri berisi text seperti ini
-            </p>
-            <button>pelajari lebih lanjut</button>
-        </td>
-        <td width="50%" align="center">
-            <img src="https://via.placeholder.com/300" alt="Gambar">
-        </td>
-    </tr>
-</table>
+        <div class="hero-media">
+          <img class="hero-img" src="Profile.jpg" alt="Gambar" />
+        </div>
+      </div>
+    </section>
 
-<br>
+    <!-- SECTION 3 : BIODATA 6 BOX (div + grid) -->
+    <section class="section" id="about">
+      <div class="section-head">
+        <h2>About Me</h2>
+        <p>a brief introduction about myself</p>
+      </div>
 
-<!-- SECTION 3 : BIODATA 6 BOX -->
-<table border="1" width="100%">
-    <tr>
-        <td colspan="3" align="center">
-            <h2>About Me</h2>
-            <p>a brief introduction about myself</p>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">full name</td>
-        <td align="center">Education</td>
-        <td align="center">Pekerjaan</td>
-    </tr>
-    <tr>
-        <td align="center">Contact</td>
-        <td align="center">Hobi</td>
-        <td align="center">Alamat</td>
-    </tr>
-</table>
+      <div class="biodata-grid">
+        <div class="card">
+          <span class="badge purple">Full Name</span>
+          <div class="value">Nama Kamu</div>
+          <div class="hint">Isi nama lengkapmu</div>
+        </div>
 
-<br>
+        <div class="card">
+          <span class="badge cyan">Education</span>
+          <div class="value">Universitas / Sekolah</div>
+          <div class="hint">Contoh: Universitas Terbuka</div>
+        </div>
 
-<!-- SECTION 4 : PORTOFOLIO -->
-<table border="1" width="100%">
-    <tr>
-        <td colspan="3" align="center">
-            <h2>Portofolio</h2>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">
-            <img src="https://via.placeholder.com/200"><br>
-            Project 1
-        </td>
-        <td align="center">
-            <img src="https://via.placeholder.com/200"><br>
-            Project 2
-        </td>
-        <td align="center">
-            <img src="https://via.placeholder.com/200"><br>
-            Project 3
-        </td>
-    </tr>
-</table>
+        <div class="card">
+          <span class="badge orange">Pekerjaan</span>
+          <div class="value">Pekerjaan Kamu</div>
+          <div class="hint">Contoh: Mahasiswa / Guru</div>
+        </div>
 
+        <div class="card">
+          <span class="badge cyan">Contact</span>
+          <div class="value">08xxxxxxxxxx</div>
+          <div class="hint">No HP / Email</div>
+        </div>
+
+        <div class="card">
+          <span class="badge orange">Hobi</span>
+          <div class="value">Membaca, Olahraga</div>
+          <div class="hint">Tulis hobi yang kamu suka</div>
+        </div>
+
+        <div class="card">
+          <span class="badge purple">Alamat</span>
+          <div class="value">Kota, Provinsi</div>
+          <div class="hint">Contoh: Jakarta, Indonesia</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 : PORTOFOLIO (div + grid) -->
+    <section class="section" id="portfolio">
+      <div class="section-head">
+        <h2>Portofolio</h2>
+        <p>Beberapa project yang pernah dibuat</p>
+      </div>
+
+      <div class="portfolio-grid">
+        <article class="project">
+          <div class="project-thumb">
+            <img src="https://via.placeholder.com/200" alt="Project 1" />
+          </div>
+          <div class="project-body">
+            <p class="project-title">Project 1</p>
+            <p class="project-desc">Deskripsi singkat project 1.</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-thumb">
+            <img src="https://via.placeholder.com/200" alt="Project 2" />
+          </div>
+          <div class="project-body">
+            <p class="project-title">Project 2</p>
+            <p class="project-desc">Deskripsi singkat project 2.</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-thumb">
+            <img src="https://via.placeholder.com/200" alt="Project 3" />
+          </div>
+          <div class="project-body">
+            <p class="project-title">Project 3</p>
+            <p class="project-desc">Deskripsi singkat project 3.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer">
+      © 2026 • Website Div + Grid • Responsive Media Queries
+    </div>
+
+  </div>
 </body>
 </html>
